@@ -1,4 +1,4 @@
-import { HueClient, DEVICE_TYPE } from "./hue-client";
+import { HueClient } from "./hue-client";
 import nock from "nock";
 
 beforeEach(() => {
@@ -15,7 +15,7 @@ describe("the hue client", () => {
     it("rejects the promise if an error is returned from the username request", async () => {
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           error: {
             type: 5,
@@ -25,7 +25,7 @@ describe("the hue client", () => {
         }
       ]);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       await expect(client.get("/foo-bar")).rejects.toThrow(
         new Error("Gateway returned error response [5:foo]: bar")
@@ -37,7 +37,7 @@ describe("the hue client", () => {
 
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
             username: testUsername
@@ -49,7 +49,7 @@ describe("the hue client", () => {
 
       bridge.get(`/api/${testUsername}/foo-bar`).reply(200, expectedResult);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       const actual = await client.get("/foo-bar");
 
@@ -61,7 +61,7 @@ describe("the hue client", () => {
 
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
             username: testUsername
@@ -79,7 +79,7 @@ describe("the hue client", () => {
         }
       ]);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       await expect(client.get("/foo-bar")).rejects.toThrow(
         new Error("Gateway returned error response [5:foo]: bar")
@@ -93,7 +93,7 @@ describe("the hue client", () => {
 
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
             username: testUsername
@@ -107,7 +107,7 @@ describe("the hue client", () => {
         .post(`/api/${testUsername}/foo-bar`, { foo: "bar" })
         .reply(200, expectedResult);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       const actual = await client.post("/foo-bar", { foo: "bar" });
 
@@ -117,7 +117,7 @@ describe("the hue client", () => {
     it("rejects the promise if an error is returned from the username request", async () => {
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           error: {
             type: 5,
@@ -127,7 +127,7 @@ describe("the hue client", () => {
         }
       ]);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       await expect(client.post("/foo-bar", { foo: "bar" })).rejects.toThrow(
         new Error("Gateway returned error response [5:foo]: bar")
@@ -139,7 +139,7 @@ describe("the hue client", () => {
 
       const bridge = nock("http://123.123.123.123");
 
-      bridge.post("/api", `{"devicetype":"${DEVICE_TYPE}"}`).reply(200, [
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
             username: testUsername
@@ -157,7 +157,7 @@ describe("the hue client", () => {
         }
       ]);
 
-      const client = new HueClient("123.123.123.123");
+      const client = new HueClient("123.123.123.123", "foo-type");
 
       await expect(client.post("/foo-bar", { foo: "bar" })).rejects.toThrow(
         new Error("Gateway returned error response [5:foo]: bar")

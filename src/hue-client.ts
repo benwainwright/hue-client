@@ -7,10 +7,12 @@ import {
   UsernameResponseType
 } from "./types";
 
-export const DEVICE_TYPE = "hue-build-status";
-
 export class HueClient {
-  constructor(private ip: string, private username?: string) {}
+  constructor(
+    private ip: string,
+    private deviceType: string,
+    private username?: string
+  ) {}
 
   private async makeRequest<T, R>(method: HttpMethod, path: string, body?: T) {
     const { data } = await axios.request<T, AxiosResponse<R | HueErrorType>>({
@@ -40,7 +42,7 @@ export class HueClient {
         UsernameRequestType,
         UsernameResponseType
       >("POST", "", {
-        devicetype: DEVICE_TYPE
+        devicetype: this.deviceType
       });
 
       const [
