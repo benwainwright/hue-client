@@ -1,5 +1,11 @@
 import axios, { AxiosResponse } from "axios";
-import { HttpMethod, HueErrorType, isError, UsernameRequestType, UsernameResponseType } from "./types"
+import {
+  HttpMethod,
+  HueErrorType,
+  isError,
+  UsernameRequestType,
+  UsernameResponseType
+} from "./types";
 
 export const DEVICE_TYPE = "hue-build-status";
 
@@ -7,11 +13,23 @@ export class HueClient {
   constructor(private ip: string, private username?: string) {}
 
   private async makeRequest<T, R>(method: HttpMethod, path: string, body?: T) {
-    const { data } = await axios.request<T, AxiosResponse<R>>({
+    const { data } = await axios.request<T, AxiosResponse<R | HueErrorType>>({
       method,
       url: `http://${this.ip}/api${path}`,
       data: body
     });
+
+    if (isError(data)) {
+      const [
+        {
+          error: { type, address, description }
+        }
+      ] = data;
+      const addressString = address ? `:${address}` : ``;
+      throw new Error(
+        `Gateway returned error response [${type}${addressString}]: ${description}`
+      );
+    }
 
     return data;
   }
@@ -20,22 +38,10 @@ export class HueClient {
     if (!this.username) {
       const response = await this.makeRequest<
         UsernameRequestType,
-        UsernameResponseType | HueErrorType
+        UsernameResponseType
       >("POST", "", {
         devicetype: DEVICE_TYPE
       });
-
-      if (isError(response)) {
-        const [
-          {
-            error: { type, address, description }
-          }
-        ] = response;
-
-        const addressString = address ? `:${address}` : ``;
-
-        throw new Error(`Error[${type}${addressString}]: ${description}`);
-      }
 
       const [
         {

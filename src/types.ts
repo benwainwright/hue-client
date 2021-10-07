@@ -16,7 +16,7 @@ export type UsernameResponseType = [
   }
 ];
 
-export const isError = (response: unknown[]): response is HueErrorType =>
+export const isError = (response: unknown): response is HueErrorType =>
   Array.isArray(response) && Object.hasOwnProperty.call(response[0], "error");
 
 export type HttpMethod = "GET" | "POST";
