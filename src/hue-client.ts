@@ -75,4 +75,8 @@ export class HueClient {
   async post<T, R>(path: string, data: T) {
     return await this.makeAuthenticatedRequest<T, R>("POST", path, data);
   }
+
+  async put<T, R>(path: string, data: T) {
+    return await this.makeAuthenticatedRequest<T, R>("PUT", path, data);
+  }
 }

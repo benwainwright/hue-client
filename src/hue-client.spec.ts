@@ -87,6 +87,84 @@ describe("the hue client", () => {
     });
   });
 
+  describe("put", () => {
+    it("if no password is passed in, it gets one from the bridge and uses it in the request, then returns the response", async () => {
+      const testUsername = "foo-username";
+
+      const bridge = nock("http://123.123.123.123");
+
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
+        {
+          success: {
+            username: testUsername
+          }
+        }
+      ]);
+
+      const expectedResult = { foo: "bar" };
+
+      bridge
+        .put(`/api/${testUsername}/foo-bar`, { foo: "bar" })
+        .reply(200, expectedResult);
+
+      const client = new HueClient("123.123.123.123", "foo-type");
+
+      const actual = await client.put("/foo-bar", { foo: "bar" });
+
+      expect(actual).toEqual(expectedResult);
+    });
+
+    it("rejects the promise if an error is returned from the username request", async () => {
+      const bridge = nock("http://123.123.123.123");
+
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
+        {
+          error: {
+            type: 5,
+            address: "foo",
+            description: "bar"
+          }
+        }
+      ]);
+
+      const client = new HueClient("123.123.123.123", "foo-type");
+
+      await expect(client.put("/foo-bar", { foo: "bar" })).rejects.toThrow(
+        new Error("Gateway returned error response [5:foo]: bar")
+      );
+    });
+
+    it("rejects the promise if an error is returned from the method response", async () => {
+      const testUsername = "foo-username";
+
+      const bridge = nock("http://123.123.123.123");
+
+      bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
+        {
+          success: {
+            username: testUsername
+          }
+        }
+      ]);
+
+      bridge.put(`/api/${testUsername}/foo-bar`).reply(200, [
+        {
+          error: {
+            type: 5,
+            address: "foo",
+            description: "bar"
+          }
+        }
+      ]);
+
+      const client = new HueClient("123.123.123.123", "foo-type");
+
+      await expect(client.put("/foo-bar", { foo: "bar" })).rejects.toThrow(
+        new Error("Gateway returned error response [5:foo]: bar")
+      );
+    });
+  });
+
   describe("post", () => {
     it("if no password is passed in, it gets one from the bridge and uses it in the request, then returns the response", async () => {
       const testUsername = "foo-username";
