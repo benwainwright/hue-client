@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",

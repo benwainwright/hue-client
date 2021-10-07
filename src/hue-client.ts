@@ -1,29 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import { HttpMethod, HueErrorType, isError, UsernameRequestType, UsernameResponseType } from "./types"
 
 export const DEVICE_TYPE = "hue-build-status";
-
-interface UsernameRequestType {
-  devicetype: string;
-}
-
-type HueErrorType = [
-  {
-    error: { type: number; address: string; description: string };
-  }
-];
-
-type UsernameResponseType = [
-  {
-    success: {
-      username: string;
-    };
-  }
-];
-
-const isError = (response: unknown[]): response is HueErrorType =>
-  Array.isArray(response) && Object.hasOwnProperty.call(response[0], "error");
-
-type HttpMethod = "GET" | "POST";
 
 export class HueClient {
   constructor(private ip: string, private username?: string) {}
