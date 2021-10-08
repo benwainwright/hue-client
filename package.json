@@ -11,7 +11,7 @@
     "test": "jest",
     "prepublish": "tsc",
     "build": "tsc",
-    "release": "semantic-release"
+    "release": "npx semantic-release"
   },
   "dependencies": {
     "@babel/preset-env": "^7.15.8",
@@ -29,7 +29,6 @@
     "jest-mock-extended": "^2.0.4",
     "nock": "^13.1.3",
     "prettier": "^2.4.1",
-    "semantic-release": "^18.0.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
