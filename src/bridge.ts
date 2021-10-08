@@ -1,5 +1,6 @@
 import {
-  LightResponse,
+  LightsResponse,
+  NewLightsResponse,
   BridgeConfig,
   ClientConfig,
   ScenesResponse
@@ -35,13 +36,37 @@ export class Bridge {
     return this.allScenes;
   }
 
+  private async getAllLights() {
+    return await this.client.get<LightsResponse>("/lights");
+  }
+
+  private async getNewLights() {
+    const response = await this.client.get<NewLightsResponse>("/lights/new");
+
+    const { lastscan, ...newLights } = response;
+
+    const isLightsResponse = (
+      newLights: unknown
+    ): newLights is LightsResponse =>
+      !Object.hasOwnProperty.call(newLights, "lastscan");
+
+    if (isLightsResponse(newLights)) {
+      return newLights;
+    }
+  }
+
   public async lights() {
-    const response = await this.client.get<{ [key: string]: LightResponse }>(
-      "/lights"
-    );
-    this.allLights = Object.entries(response).map(
-      ([id, response]) => new Light(id, response, this.client)
-    );
+    const newLights =
+      this.allLights.length > 0
+        ? await this.getAllLights()
+        : await this.getNewLights();
+
+    this.allLights = [
+      ...this.allLights,
+      ...Object.entries(newLights ?? {}).map(
+        ([id, response]) => new Light(id, response, this.client)
+      )
+    ];
     return this.allLights;
   }
 }

@@ -90,6 +90,13 @@ export interface LightConfig {
   startup: { mode: string; configured: boolean };
 }
 
+export type LightsResponse = { [key: string]: LightResponse };
+
+export type NewLightsResponse = {
+  [key: string]: LightResponse | string;
+  lastscan: string;
+};
+
 export interface LightResponse {
   state: LightState;
   swupdate: LightSwUpdate;
