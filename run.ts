@@ -10,7 +10,7 @@ const loadConfig = async (path: string) => {
     const config = JSON.parse(await readFile(path, "utf8"));
 
     if (typeof !config === "object") {
-      throw new Error("Config file should be an object");
+      throw new Error("Config file should be an object!");
     }
     return config;
   } catch {
