@@ -1,5 +1,5 @@
 import { BridgeConfig, UpdateableBridgeConfig } from "../types";
-import { Client } from "../client";
+import { Client } from "../types/client";
 
 export class Config {
   constructor(public response: BridgeConfig, private client: Client) {}

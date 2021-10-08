@@ -1,5 +1,5 @@
 import { Scene } from "./scene";
-import { Client } from "../client";
+import { Client } from "../types/client";
 import { mock } from "jest-mock-extended";
 import { SceneResponse } from "../types";
 

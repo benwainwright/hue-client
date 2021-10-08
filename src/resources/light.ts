@@ -1,5 +1,5 @@
 import { LightResponse, LightState } from "../types";
-import { Client } from "../client";
+import { Client } from "../types/client";
 import { MutableEntityClient } from "../mutable-entity-client";
 
 export class Light {

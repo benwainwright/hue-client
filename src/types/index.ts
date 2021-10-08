@@ -17,3 +17,5 @@ export { ScenesResponse } from "./scenes-response";
 export { UpdateableBridgeConfig } from "./updateable-bridge-config";
 export { UsernameRequestType } from "./username-request-types";
 export { UsernameResponseType } from "./username-response-type";
+export { Client } from "./client";
+export { HueBridge } from "./hue-bridge";

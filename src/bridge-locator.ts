@@ -2,7 +2,7 @@ import { getServiceIpWithBonjour } from "./utils";
 import { LocalHueClient } from "./clients";
 import { ClientConfig } from "./types";
 import { Bridge } from "./bridge";
-import { HueBridge } from "./hue-bridge";
+import { HueBridge } from "./types/hue-bridge";
 
 export class BridgeLocator {
   public static async local(config: ClientConfig): Promise<HueBridge> {

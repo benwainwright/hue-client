@@ -1,5 +1,5 @@
 import { Light } from "./light";
-import { Client } from "../client";
+import { Client } from "../types/client";
 import { mock } from "jest-mock-extended";
 
 describe("light", () => {

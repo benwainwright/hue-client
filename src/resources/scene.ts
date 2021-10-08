@@ -1,5 +1,5 @@
 import { SceneResponse } from "../types";
-import { Client } from "../client";
+import { Client } from "../types";
 
 export class Scene {
   constructor(

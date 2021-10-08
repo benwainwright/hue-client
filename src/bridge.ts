@@ -3,11 +3,11 @@ import {
   NewLightsResponse,
   BridgeConfig,
   ClientConfig,
-  ScenesResponse
+  ScenesResponse,
+  HueBridge
 } from "./types";
-import { HueBridge } from "./hue-bridge";
 import { Light, Scene, Config } from "./resources";
-import { Client } from "./client";
+import { Client } from "./types/client";
 
 export class Bridge implements HueBridge {
   private allLights: Light[] = [];

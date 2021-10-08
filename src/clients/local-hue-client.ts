@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Client } from "../client";
+import { Client } from "../types/client";
 import {
   HttpMethod,
   HueErrorType,
