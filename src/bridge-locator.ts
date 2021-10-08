@@ -1,5 +1,5 @@
 import { getServiceIpWithBonjour } from "./utils";
-import { LocalHueClient } from "./local-hue-client";
+import { LocalHueClient } from "./clients";
 import { ClientConfig } from "./types";
 import { Bridge } from "./bridge";
 import { HueBridge } from "./hue-bridge";

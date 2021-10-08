@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
-import { Client } from "./client";
+import { Client } from "../client";
 import {
   HttpMethod,
   HueErrorType,
   isError,
   UsernameRequestType,
   UsernameResponseType
-} from "./types";
+} from "../types";
 
 const DEFAULT_DEVICE_TYPE = "hue-client";
 

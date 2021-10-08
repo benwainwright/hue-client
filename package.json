@@ -36,7 +36,8 @@
   "dependencies": {
     "axios": "^0.22.0",
     "bonjour": "^3.5.0",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "hue-client-typescript": "^1.5.2"
   },
   "release": {
     "branches": [
