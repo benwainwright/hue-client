@@ -115,7 +115,7 @@ export interface LightState {
   xy: [number, number];
   ct: number;
   alert: `select` | `lselect` | `none`;
-  colormode: string;
+  colormode: "xy" | "hs";
   mode: string;
   reachable: boolean;
 }
