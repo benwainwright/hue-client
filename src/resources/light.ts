@@ -1,6 +1,6 @@
-import { LightResponse, LightState } from "./types";
-import { Client } from "./client";
-import { MutableEntityClient } from "./mutable-entity-client";
+import { LightResponse, LightState } from "../types";
+import { Client } from "../client";
+import { MutableEntityClient } from "../mutable-entity-client";
 
 export class Light {
   private client: MutableEntityClient<LightResponse>;

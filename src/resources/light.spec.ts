@@ -1,6 +1,7 @@
 import { Light } from "./light";
 import { Client } from "./client";
 import { mock } from "jest-mock-extended";
+
 describe("light", () => {
   describe("reload", () => {
     it("calls get with the path", async () => {
