@@ -8,12 +8,17 @@ import {
   UsernameResponseType
 } from "./types";
 
+const DEFAULT_DEVICE_TYPE = "hue-client";
+
 export class LocalHueClient implements Client {
+  private deviceType: string;
   public constructor(
     private ip: string,
-    private deviceType: string,
+    deviceType?: string,
     private username?: string
-  ) {}
+  ) {
+    this.deviceType = deviceType ?? DEFAULT_DEVICE_TYPE;
+  }
 
   private async makeRequest<T, R>(method: HttpMethod, path: string, body?: T) {
     const { data } = await axios.request<T, AxiosResponse<R | HueErrorType>>({

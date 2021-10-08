@@ -12,10 +12,12 @@ export const getServiceIpWithBonjour = (type: string): Promise<IpAddress> =>
         reject(new Error("Ip was not found in bonjour response"));
         return;
       }
+      bonjourClient.destroy();
       accept(ip);
     });
 
     setTimeout(() => {
+      bonjourClient.destroy();
       reject(new Error("Timed out looking for bridge"));
     }, TIMEOUT);
   });

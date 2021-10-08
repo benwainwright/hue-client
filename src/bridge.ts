@@ -1,29 +1,31 @@
 import { LightResponse, BridgeConfig, ClientConfig } from "./types";
-import { LocalHueClient } from "./local-hue-client
+import { LocalHueClient } from "./local-hue-client";
 import { Light } from "./light";
 import { Scene } from "./scene";
 import { Client } from "./client";
 import { Config } from "./config";
-import { getServiceIpWithBonjour } from "./get-service-ip-with-bonjour"
+import { getServiceIpWithBonjour } from "./get-service-ip-with-bonjour";
 
 export class Bridge {
-
   private allLights: Light[] = [];
   private allScenes: Scene[] = [];
 
-  private constructor(private client: Client, private clientConfig: ClientConfig) {}
+  private constructor(
+    private client: Client,
+    private clientConfig: ClientConfig
+  ) {}
 
   public static async local(config: ClientConfig) {
     const ip = await getServiceIpWithBonjour("hue");
-    const client = new LocalHueClient(ip, config.deviceType, config.username)
+    const client = new LocalHueClient(ip, config.deviceType, config.username);
 
-    const newConfig = {...config, username: await client.getUsername()}
+    const newConfig = { ...config, username: await client.getUsername() };
 
-    return new Bridge(client, newConfig)
+    return new Bridge(client, newConfig);
   }
 
   public get username() {
-    return this.clientConfig.username
+    return this.clientConfig.username;
   }
 
   public async config() {
