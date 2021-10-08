@@ -1,5 +1,5 @@
 import * as path from "path";
-import { Bridge } from "./src/bridge";
+import { BridgeLocator } from "./src/bridge-locator";
 import { readFile, writeFile } from "fs/promises";
 
 const fileInCurrentDirectory = (file: string) =>
@@ -22,7 +22,10 @@ const run = async () => {
   const configPath = fileInCurrentDirectory("hue.json");
   const config = await loadConfig(configPath);
 
-  const bridge = await Bridge.local(config);
+  const bridge = await BridgeLocator.local(config);
+
+  const bridgeConfig = await bridge.config();
+  console.log(bridgeConfig);
 
   const finalConfig = { ...config, username: bridge.username };
 
