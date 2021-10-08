@@ -46,7 +46,7 @@ jobs:
 
   release:
     name: Release
-    needs: [run-unit-tests]
+    needs: [run-unit-tests, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
