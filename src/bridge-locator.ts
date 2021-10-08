@@ -1,4 +1,4 @@
-import { getServiceIpWithBonjour } from "./utils/get-service-ip-with-bonjour";
+import { getServiceIpWithBonjour } from "./utils";
 import { LocalHueClient } from "./local-hue-client";
 import { ClientConfig } from "./types";
 import { Bridge } from "./bridge";
