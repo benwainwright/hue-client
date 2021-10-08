@@ -23,10 +23,12 @@ const run = async () => {
   const config = await loadConfig(configPath);
 
   const bridge = await BridgeLocator.local(config);
+  console.log("calling");
 
-  const lights = await bridge.lights();
+  await bridge.lights();
+  await bridge.lights();
 
-  console.log(lights);
+  console.log("second");
 
   const finalConfig = { ...config, username: bridge.username };
 
