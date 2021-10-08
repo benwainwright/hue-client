@@ -5,7 +5,7 @@ import {
   HueErrorType,
   isError,
   UsernameRequestType,
-  UsernameResponseType,
+  UsernameResponseType
 } from "../types";
 
 const DEFAULT_DEVICE_TYPE = "hue-client";
@@ -24,14 +24,14 @@ export class LocalHueClient implements Client {
     const { data } = await axios.request<T, AxiosResponse<R | HueErrorType>>({
       method,
       url: `http://${this.ip}/api${path}`,
-      data: body,
+      data: body
     });
 
     if (isError(data)) {
       const [
         {
-          error: { type, address, description },
-        },
+          error: { type, address, description }
+        }
       ] = data;
       const addressString = address ? `:${address}` : ``;
       throw new Error(
@@ -48,13 +48,13 @@ export class LocalHueClient implements Client {
         UsernameRequestType,
         UsernameResponseType
       >("POST", "", {
-        devicetype: this.deviceType,
+        devicetype: this.deviceType
       });
 
       const [
         {
-          success: { username },
-        },
+          success: { username }
+        }
       ] = response;
 
       this.username = username;
