@@ -20,9 +20,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
@@ -40,9 +40,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       const expectedResult = { foo: "bar" };
@@ -64,9 +64,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       bridge.get(`/api/${testUsername}/foo-bar`).reply(200, [
@@ -74,9 +74,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
@@ -96,9 +96,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       const expectedResult = { foo: "bar" };
@@ -122,9 +122,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
@@ -142,9 +142,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       bridge.put(`/api/${testUsername}/foo-bar`).reply(200, [
@@ -152,9 +152,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
@@ -174,9 +174,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       const expectedResult = { foo: "bar" };
@@ -200,9 +200,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
@@ -220,9 +220,9 @@ describe("the hue client", () => {
       bridge.post("/api", `{"devicetype":"foo-type"}`).reply(200, [
         {
           success: {
-            username: testUsername
-          }
-        }
+            username: testUsername,
+          },
+        },
       ]);
 
       bridge.post(`/api/${testUsername}/foo-bar`).reply(200, [
@@ -230,9 +230,9 @@ describe("the hue client", () => {
           error: {
             type: 5,
             address: "foo",
-            description: "bar"
-          }
-        }
+            description: "bar",
+          },
+        },
       ]);
 
       const client = new LocalHueClient("123.123.123.123", "foo-type");
