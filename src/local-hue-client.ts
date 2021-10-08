@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { Client } from "./client";
 import {
   HttpMethod,
   HueErrorType,
@@ -7,8 +8,8 @@ import {
   UsernameResponseType
 } from "./types";
 
-export class HueClient {
-  constructor(
+export class LocalHueClient implements Client {
+  public constructor(
     private ip: string,
     private deviceType: string,
     private username?: string

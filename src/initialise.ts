@@ -1,5 +1,5 @@
 import * as path from "path";
-import { HueClient } from "./hue-client";
+import { LocalHueClient } from "./local-hue-client";
 import { Hue } from "./hue";
 import { readJson, pathExists, writeJson } from "fs-extra";
 import { createConfig } from "./create-config";
@@ -17,7 +17,7 @@ export const initialise = async () => {
 
   const { ip, deviceType, username } = loadedConfig;
 
-  const client = new HueClient(ip, deviceType, username);
+  const client = new LocalHueClient(ip, deviceType, username);
 
   if (!username) {
     const newConfig = { ...loadedConfig, username: await client.getUsername() };
