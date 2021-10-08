@@ -1,10 +1,10 @@
-import { ScenesResponse } from "./types";
+import { SceneResponse } from "./types";
 import { Client } from "./client";
 
 export class Scene {
   constructor(
     private id: string,
-    public response: ScenesResponse,
+    public response: SceneResponse,
     private client: Client
   ) {}
 

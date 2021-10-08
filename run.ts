@@ -24,8 +24,9 @@ const run = async () => {
 
   const bridge = await BridgeLocator.local(config);
 
-  const bridgeConfig = await bridge.config();
-  console.log(bridgeConfig);
+  const lights = await bridge.lights();
+
+  console.log(lights);
 
   const finalConfig = { ...config, username: bridge.username };
 

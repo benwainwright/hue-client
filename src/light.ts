@@ -1,43 +1,52 @@
-import { LightResponse, LightState, LightStateChange } from "./types";
+import { LightResponse, LightState } from "./types";
 import { Client } from "./client";
+import { MutableEntityClient } from "./mutable-entity-client";
 
 export class Light {
-  constructor(
-    public id: string,
-    public response: LightResponse,
-    private client: Client
-  ) {}
+  private client: MutableEntityClient<LightResponse>;
 
-  public async setState(state: LightStateChange) {
-    return await this.client.put(`/lights/${this.id}/state`, state);
+  constructor(public id: string, response: LightResponse, client: Client) {
+    this.client = new MutableEntityClient(
+      `/lights/${this.id}`,
+      response,
+      client
+    );
+  }
+
+  public async reload() {
+    this.client.reload();
+  }
+
+  public get response() {
+    return this.client.response;
   }
 
   public async on() {
-    return this.setState({ on: true });
+    return this.client.setState({ on: true });
   }
 
   public async off() {
-    return this.setState({ on: false });
+    return this.client.setState({ on: false });
   }
 
   public async brightness(bri: number) {
-    return this.setState({ bri });
+    return this.client.setState({ bri });
   }
 
   public async hue(hue: number) {
-    return this.setState({ hue });
+    return this.client.setState({ hue });
   }
 
   public async saturation(saturation: number) {
-    return this.setState({ sat: saturation });
+    return this.client.setState({ sat: saturation });
   }
 
   public async flashOnce() {
-    this.setState({ alert: "select" });
+    this.client.setState({ alert: "select" });
   }
 
   public async flashRepeat() {
-    this.setState({ alert: "lselect" });
+    this.client.setState({ alert: "lselect" });
   }
 
   public get state(): LightState {

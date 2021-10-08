@@ -1,4 +1,9 @@
-import { LightResponse, BridgeConfig, ClientConfig } from "./types";
+import {
+  LightResponse,
+  BridgeConfig,
+  ClientConfig,
+  ScenesResponse
+} from "./types";
 import { Light } from "./light";
 import { Scene } from "./scene";
 import { Client } from "./client";
@@ -23,7 +28,7 @@ export class Bridge {
   }
 
   public async scenes() {
-    const response = await this.client.get<BridgeConfig>("/scenes");
+    const response = await this.client.get<ScenesResponse>("/scenes");
     this.allScenes = Object.entries(response).map(
       ([id, response]) => new Scene(id, response, this.client)
     );
