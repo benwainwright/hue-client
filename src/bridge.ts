@@ -5,12 +5,13 @@ import {
   ClientConfig,
   ScenesResponse
 } from "./types";
+import { HueBridge } from "./hue-bridge";
 import { Light } from "./light";
 import { Scene } from "./scene";
 import { Client } from "./client";
 import { Config } from "./config";
 
-export class Bridge {
+export class Bridge implements HueBridge {
   private allLights: Light[] = [];
   private allScenes: Scene[] = [];
 
