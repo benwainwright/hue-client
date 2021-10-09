@@ -35,23 +35,12 @@ export class Bridge implements HueBridge {
     return this.allScenes;
   }
 
-  private async getAllLights() {
-    return await this.client.get<LightsResponse>("/lights");
-  }
-
-  private async getNewLights(): Promise<LightsResponse> {
-    const response = await this.client.get<NewLightsResponse>("/lights/new");
+  public async lights() {
+    const response = await this.client.get<NewLightsResponse>(
+      this.allLights.length === 0 ? "/lights" : "/lights/new"
+    );
 
     const { lastscan, ...newLights } = response;
-
-    return newLights;
-  }
-
-  public async lights() {
-    const newLights =
-      this.allLights.length === 0
-        ? await this.getAllLights()
-        : await this.getNewLights();
 
     this.allLights = [
       ...this.allLights,
