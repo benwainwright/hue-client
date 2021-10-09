@@ -1,6 +1,5 @@
 import { LightResponse } from "./light-response";
 
 export type NewLightsResponse = {
-  [key: string]: LightResponse | string;
-  lastscan: string;
+  [K in string]: K extends "lastscan" ? string : LightResponse;
 };

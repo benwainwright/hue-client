@@ -2,10 +2,10 @@ import nock from "nock";
 
 import { BridgeLocator } from "./bridge-locator";
 import { when } from "jest-when";
-import { LightResponse } from "./types";
+import { LightResponse, BridgeConfig } from "./types";
 import { getServiceIpWithBonjour } from "./utils";
 import { mock } from "jest-mock-extended";
-import { Light } from "./resources";
+import { Light, Config } from "./resources";
 
 jest.mock("./utils");
 
@@ -20,7 +20,7 @@ afterEach(() => {
 
 describe("bridge locator", () => {
   describe("local", () => {
-    it.only("returns a bridge that makes requests to the ip address supplied by bonjour and constructs lights from the response", async () => {
+    it("returns a bridge that makes requests to the ip address supplied by bonjour and constructs lights from the response", async () => {
       const bridge = nock("http://123.123.123.123");
 
       const config = {

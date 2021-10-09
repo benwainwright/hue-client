@@ -8,7 +8,7 @@ import {
   UsernameResponseType
 } from "../types";
 
-const DEFAULT_DEVICE_TYPE = "hue-client";
+export const DEFAULT_DEVICE_TYPE = "hue-client";
 
 export class LocalHueClient implements Client {
   private deviceType: string;

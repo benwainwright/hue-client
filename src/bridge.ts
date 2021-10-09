@@ -39,19 +39,12 @@ export class Bridge implements HueBridge {
     return await this.client.get<LightsResponse>("/lights");
   }
 
-  private async getNewLights() {
+  private async getNewLights(): Promise<LightsResponse> {
     const response = await this.client.get<NewLightsResponse>("/lights/new");
 
     const { lastscan, ...newLights } = response;
 
-    const isLightsResponse = (
-      newLights: unknown
-    ): newLights is LightsResponse =>
-      !Object.hasOwnProperty.call(newLights, "lastscan");
-
-    if (isLightsResponse(newLights)) {
-      return newLights;
-    }
+    return newLights;
   }
 
   public async lights() {
@@ -62,7 +55,7 @@ export class Bridge implements HueBridge {
 
     this.allLights = [
       ...this.allLights,
-      ...Object.entries(newLights ?? {}).map(
+      ...Object.entries(newLights).map(
         ([id, response]) => new Light(id, response, this.client)
       )
     ];
