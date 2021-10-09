@@ -7,7 +7,15 @@ const config: Config.InitialOptions = {
   collectCoverageFrom: ["<rootDir>/src/**/*"],
   coverageDirectory: "coverage",
   modulePathIgnorePatterns: ["dist", "node_modules"],
-  setupFilesAfterEnv: ["jest-extended"]
+  setupFilesAfterEnv: ["jest-extended"],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
+    }
+  }
 };
 
 export default config;
